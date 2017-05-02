@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+	xmlns:activiti="http://activiti.org/bpmn" 
+	targetNamespace="Examples"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL  
+             http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+    <process id="learn_process" name="融都请假流程">
+    	<startEvent id="learn_1" name="请假申请"></startEvent>
+    	
+    	<userTask id="dept_manager" name="部门经理审批"></userTask>
+    	<userTask id="boss_manager" name="总经理审批"></userTask>
+    	<userTask id="hr_manager" name="hr登记"></userTask>
+    	
+    	<sequenceFlow id="flow1" targetRef="dept_manager" sourceRef="learn_1"></sequenceFlow>
+    	<sequenceFlow id="flow2" targetRef="boss_manager" sourceRef="dept_manager">
+    		<conditionExpression xsi:type="tFormalExpression"><![CDATA[${day >= 5}]]></CDATA></conditionExpression>
+    	</sequenceFlow>
+    	<sequenceFlow id="flow3" targetRef="hr_manager" sourceRef="boss_manager"></sequenceFlow>
+    	<sequenceFlow id="flow4" targetRef="hr_manager" sourceRef="dept_manager">
+    		<conditionExpression xsi:type="tFormalExpression"><![CDATA[${day < 5}]]></conditionExpression>
+    	</sequenceFlow>
+    	<sequenceFlow id="flow5" targetRef="end_1" sourceRef="hr_manager"></sequenceFlow>
+    	
+    	<endEvent id="end_1" name="请假结束"></endEvent>
+    </process>
+</definitions>

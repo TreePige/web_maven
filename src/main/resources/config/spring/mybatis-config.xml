@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 全局参数 -->
+    <settings>
+        <!-- 使全局的映射器启用或禁用缓存。 -->
+        <setting name="cacheEnabled" value="true"/>
+
+        <!-- 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载。 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+
+        <!-- 当启用时，有延迟加载属性的对象在被调用时将会完全加载任意属性。否则，每种属性将会按需要加载。 -->
+        <setting name="aggressiveLazyLoading" value="true"/>
+
+        <!-- 是否允许单条sql 返回多个数据集  (取决于驱动的兼容性) default:true -->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+
+        <!-- 是否可以使用列的别名 (取决于驱动的兼容性) default:true -->
+        <setting name="useColumnLabel" value="true"/>
+
+        <!-- 允许JDBC 生成主键。需要驱动器支持。如果设为了true，这个设置将强制使用被生成的主键，有一些驱动器不兼容不过仍然可以执行。  default:false  -->
+        <setting name="useGeneratedKeys" value="false"/>
+
+        <!-- 指定 MyBatis 如何自动映射 数据基表的列 NONE：不隐射　PARTIAL:部分  FULL:全部  -->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+
+        <!-- 这是默认的执行类型  （SIMPLE: 简单； REUSE: 执行器可能重复使用prepared statements语句；BATCH: 执行器可以重复执行语句和批量更新）  -->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+
+        <!-- 使用驼峰命名法转换字段。 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 设置本地缓存范围 session:就会有数据的共享  statement:语句范围 (这样就不会有数据的共享 ) defalut:session -->
+        <setting name="localCacheScope" value="SESSION"/>
+
+        <!-- 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型 -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+
+    </settings>
+
+    <!-- 类型别名 -->
+    <typeAliases>
+        <typeAlias alias="sysUser" type="com.rongdu.eloan.modules.system.domain.SysUser"/>
+        <typeAlias alias="role" type="com.rongdu.eloan.modules.system.domain.SysRole"/>
+        <typeAlias alias="sysOffice" type="com.rongdu.eloan.modules.system.domain.SysOffice"/>
+        <typeAlias alias="sysUserRole" type="com.rongdu.eloan.modules.system.domain.SysUserRole"/>
+        <typeAlias alias="sysOfficeUserCount" type="com.rongdu.eloan.modules.system.domain.SysOfficeUserCount"/>
+        <typeAlias alias="menu" type="com.rongdu.eloan.modules.system.domain.SysMenu"/>
+        <typeAlias alias="menuModel" type="com.rongdu.eloan.modules.system.model.MenuModel"/>
+        <typeAlias alias="menuCheked" type="com.rongdu.eloan.modules.system.model.SysMenuCheck"/>
+        <typeAlias alias="roleMenu" type="com.rongdu.eloan.modules.system.domain.SysRoleMenu"/>
+        <typeAlias alias="dict" type="com.rongdu.eloan.modules.system.domain.SysDict"/>
+        <typeAlias alias="sysDictDetail" type="com.rongdu.eloan.modules.system.domain.SysDictDetail"/>
+        <typeAlias alias="pubAttachment" type="com.rongdu.eloan.modules.common.domain.PubAttachment"/>
+        <typeAlias alias="PubBizAttachment" type="com.rongdu.eloan.modules.common.domain.PubBizAttachment"/>
+        <typeAlias alias="PubProfile" type="com.rongdu.eloan.modules.common.domain.PubProfile"/>
+        <typeAlias alias="ProductType" type="com.rongdu.eloan.modules.paramconfig.domain.ProductType"/>
+        <typeAlias alias="ProductParam" type="com.rongdu.eloan.modules.paramconfig.domain.ProductParam"/>
+        <typeAlias alias="felFormula" type="com.rongdu.eloan.modules.fel.domain.FelFormula"/>
+        <typeAlias alias="felParam" type="com.rongdu.eloan.modules.fel.domain.FelParam"/>
+        <typeAlias alias="felType" type="com.rongdu.eloan.modules.fel.domain.FelType"/>
+        <typeAlias alias="sysBank" type="com.rongdu.eloan.modules.system.domain.SysBank"/>
+        <typeAlias alias="SysConfig" type="com.rongdu.eloan.modules.system.domain.SysConfig"/>
+        <typeAlias alias="PubLoanprocess" type="com.rongdu.eloan.modules.common.domain.PubLoanprocess"/>
+        <typeAlias alias="PubProject" type="com.rongdu.fams.common.domain.Project"/>
+        <!-- <typeAlias alias="PubProjectProcess" type="com.rongdu.eloan.common.domain.PubProjectProcess" /> -->
+        <!-- <typeAlias alias="HousPropertyInformation" type="com.rongdu.eloan.modules.instance.domain.HousPropertyInformation" /> -->
+        <!-- <typeAlias alias="HousAssessmentAgencies" type="com.rongdu.eloan.modules.instance.domain.HousAssessmentAgencies" /> -->
+        <!-- <typeAlias alias="HousBorrowingBasics" type="com.rongdu.eloan.modules.instance.domain.HousBorrowingBasics" /> -->
+        <!-- <typeAlias alias="HousEnquiryInstitution" type="com.rongdu.eloan.modules.instance.domain.HousEnquiryInstitution" /> -->
+        <typeAlias alias="PlConsult" type="com.rongdu.eloan.modules.common.domain.PlConsult"/>
+        <typeAlias alias="PlProduct" type="com.rongdu.eloan.modules.common.domain.PlProduct"/>
+        <!-- <typeAlias alias="HousRebate" type="com.rongdu.eloan.modules.rebate.domain.HousRebate" />
+        <typeAlias alias="PlBorrow" type="com.rongdu.eloan.common.domain.PlBorrow" />
+        <typeAlias alias="HousBills" type="com.rongdu.eloan.modules.audit.domain.HousBills" />
+        <typeAlias alias="HousLoanfees" type="com.rongdu.eloan.modules.audit.domain.HousLoanfees" /> -->
+        <typeAlias alias="PlFeeinfo" type="com.rongdu.eloan.modules.common.domain.PlFeeinfo"/>
+        <typeAlias alias="PubLoan" type="com.rongdu.eloan.modules.common.domain.PubLoan"/>
+        <typeAlias alias="PubContractAttachment" type="com.rongdu.eloan.modules.common.domain.PubContractAttachment"/>
+        <!--  -->
+        <typeAlias alias="landlordBank" type="com.rongdu.fams.modules.auditmanager.domain.LandlordBank"/>
+        <typeAlias alias="landlordLinkman" type="com.rongdu.fams.modules.auditmanager.domain.LandlordLinkman"/>
+        <typeAlias alias="landlordMsg" type="com.rongdu.fams.modules.auditmanager.domain.LandlordMsg"/>
+        <typeAlias alias="leaseCash" type="com.rongdu.fams.modules.auditmanager.domain.LeaseCash"/>
+        <typeAlias alias="leaseMsg" type="com.rongdu.fams.modules.auditmanager.domain.LeaseMsg"/>
+        <typeAlias alias="leasePhoto" type="com.rongdu.fams.modules.auditmanager.domain.LeasePhoto"/>
+        <typeAlias alias="loanManager" type="com.rongdu.fams.modules.auditmanager.domain.LoanManager"/>
+        <typeAlias alias="processDetail" type="com.rongdu.fams.modules.auditmanager.domain.ProcessDetail"/>
+        <typeAlias alias="repayinfo" type="com.rongdu.fams.modules.auditmanager.domain.Repayinfo"/>
+        <typeAlias alias="repayPlan" type="com.rongdu.fams.modules.auditmanager.domain.RepayPlan"/>
+        <!-- 附件上传-->
+        <typeAlias type="com.rongdu.fams.common.attachment.domain.PlAttachment" alias="plAttachment"/>
+        <typeAlias type="com.rongdu.fams.common.attachment.domain.PlAttachmentCorrelation"
+                   alias="plAttachmentCorrelation"/>
+        <typeAlias type="com.rongdu.fams.common.attachment.domain.PlAttachmentType" alias="plAttachmentType"/>
+        <typeAlias type="com.rongdu.fams.common.attachment.domain.PlAttachmentTypeCorrelation"
+                   alias="PlAttachmentTypeCorrelation"/>
+
+        <!-- channel module -->
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAsset" alias="channelAsset"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetContact" alias="ChannelAssetContact"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetAccount" alias="channelAssetAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetProfit" alias="channelAssetProfit"/>
+
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelCreditOrganize" alias="channelCreditOrganize"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelCreditOrgAccount"
+                   alias="channelCreditOrgAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelCreditOrgContact"
+                   alias="ChannelCreditOrgContact"/>
+
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetMng" alias="channelAssetMng"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetMngAccount" alias="channelAssetMngAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetMngContact" alias="ChannelAssetMngContact"/>
+
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelExchangeAccount" alias="channelExchangeAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelExchange" alias="channelExchange"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelExchangeProfit" alias="channelExchangeProfit"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelExchangeContact" alias="ChannelExchangeContact"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelExchangeCooperation"
+                   alias="ChannelExchangeCooperation"/>
+
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetSide" alias="channelAssetSide"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetSideAccount"
+                   alias="channelAssetSideAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetSideContact"
+                   alias="ChannelAssetSideContact"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetSideProfit" alias="ChannelAssetSideProfit"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelAssetSideFinancing"
+                   alias="ChannelAssetSideFinancing"/>
+
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelOperatePalt" alias="ChannelOperatePalt"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelOperatePaltAccount"
+                   alias="ChannelOperatePaltAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelOperatePaltProfit"
+                   alias="ChannelOperatePaltProfit"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelOperatePaltContact"
+                   alias="ChannelOperatePaltContact"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelOperatePaltCooperation"
+                   alias="ChannelOperatePaltCooperation"/>
+
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelCapitalSide" alias="ChannelCapitalSide"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelCapitalSideAccount"
+                   alias="ChannelCapitalSideAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.channel.domain.ChannelCapitalSideContact"
+                   alias="ChannelCapitalSideContact"/>
+
+
+        <!-- 底层资产 -->
+        <typeAlias alias="Asset" type="com.rongdu.fams.modules.asset.domain.Asset"/>
+        <typeAlias alias="AssetChangeHis" type="com.rongdu.fams.modules.asset.domain.AssetChangeHis"/>
+        <typeAlias alias="AssetPackage" type="com.rongdu.fams.modules.asset.domain.AssetPackage"/>
+        <typeAlias alias="AssetPackageCashflow" type="com.rongdu.fams.modules.asset.domain.AssetPackageCashflow"/>
+        <typeAlias alias="AssetPackageCashflowSumPlan"
+                   type="com.rongdu.fams.modules.asset.domain.AssetPackageCashflowSumPlan"/>
+        <typeAlias alias="AssetPackageCashflowSumReal"
+                   type="com.rongdu.fams.modules.asset.domain.AssetPackageCashflowSumReal"/>
+
+        <typeAlias alias="AssetPackagePush" type="com.rongdu.fams.modules.asset.domain.AssetPackagePush"/>
+        <typeAlias alias="AssetPackagePushAudit" type="com.rongdu.fams.modules.asset.domain.AssetPackagePushAudit"/>
+
+        <typeAlias alias="AssetPackageDetail" type="com.rongdu.fams.modules.asset.domain.AssetPackageDetail"/>
+        <typeAlias alias="AssetPayPlan" type="com.rongdu.fams.modules.asset.domain.AssetPayPlan"/>
+        <typeAlias alias="AssetPayPlanHis" type="com.rongdu.fams.modules.asset.domain.AssetPayPlanHis"/>
+        <typeAlias alias="AssetBreach" type="com.rongdu.fams.modules.asset.domain.AssetBreach"/>
+        <typeAlias alias="AssetOverPayment" type="com.rongdu.fams.modules.asset.domain.AssetOverPayment"/>
+        <typeAlias alias="AssetPrePayment" type="com.rongdu.fams.modules.asset.domain.AssetPrePayment"/>
+        <typeAlias alias="AssetProfit" type="com.rongdu.fams.modules.asset.domain.AssetProfit"/>
+
+
+        <!-- 初始产品 -->
+       <typeAlias alias="Product" type="com.rongdu.fams.modules.product.domain.Product"/>
+       <typeAlias alias="ProductXlsx" type="com.rongdu.fams.modules.product.domain.ProductXlsx"/>
+       <typeAlias alias="ProductCapitalSource" type="com.rongdu.fams.modules.product.domain.ProductCapitalSource"/>
+       <typeAlias alias="ProductCost" type="com.rongdu.fams.modules.product.domain.ProductCost"/>
+       <typeAlias alias="ProductCostBreakdown" type="com.rongdu.fams.modules.product.domain.ProductCostBreakdown"/>
+       <typeAlias alias="ProductPaymentPlan" type="com.rongdu.fams.modules.product.domain.ProductPaymentPlan"/>
+       <typeAlias alias="ProductProfitPayAccount" type="com.rongdu.fams.modules.product.domain.ProductProfitPayAccount"/>
+       <typeAlias alias="ProductAudit" type="com.rongdu.fams.modules.product.domain.ProductAudit"/>
+       <typeAlias alias="ProductDirectory" type="com.rongdu.fams.modules.product.domain.ProductDirectory"/>
+       <typeAlias alias="ProductResolutionRule" type="com.rongdu.fams.modules.product.domain.ProductResolutionRule"/>
+       <typeAlias alias="ProductReleaseRule" type="com.rongdu.fams.modules.product.domain.ProductReleaseRule"/>
+       <typeAlias alias="ProductDirectoryRelReleaseRule" type="com.rongdu.fams.modules.product.domain.ProductDirectoryRelReleaseRule"/>
+       <typeAlias alias="ProductDirectoryRelSplitRule" type="com.rongdu.fams.modules.product.domain.ProductDirectoryRelSplitRule"/>
+      
+        <!-- 理财产品 -->
+        <typeAlias alias="FinProduct" type="com.rongdu.fams.modules.finproduct.domain.FinProduct"/>
+
+        <!--  资金池 -->
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalInPool" alias="CapitalInPool"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalExtract" alias="CapitalExtract"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalCurrencyFund" alias="CapitalCurrencyFund"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalCurrencyFundTrade"
+                   alias="CapitalCurrencyFundTrade"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalApplyFundTransfer"
+                   alias="CapitalApplyFundTransfer"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalApplyFundTransferAudit"
+                   alias="CapitalApplyFundTransferAudit"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalApplyFundTransferDetail"
+                   alias="CapitalApplyFundTransferDetail"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalPayTransfer" alias="CapitalPayTransfer"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalPayTransferAudit"
+                   alias="CapitalPayTransferAudit"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalPayTransferDetail"
+                   alias="CapitalPayTransferDetail"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalExpectInAccount"
+                   alias="CapitalExpectInAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalExpectInAccountDetail"
+                   alias="CapitalExpectInAccountDetail"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalExpectOutAccount"
+                   alias="CapitalExpectOutAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalExpectOutAccountDetail"
+                   alias="CapitalExpectOutAccountDetail"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalRealInAccount"
+                   alias="CapitalRealInAccount"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalRealInAccountDetail"
+                   alias="CapitalRealInAccountDetail"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalRealTransfer"
+                   alias="CapitalRealTransfer"/>
+        <typeAlias type="com.rongdu.fams.modules.capital.domain.CapitalRealTransferDetail"
+                   alias="CapitalRealTransferDetail"/>
+                   
+
+        <!-- 外部资金  -->
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalFinance"
+                   alias="OutCapitalFinance"/>
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalFinanceAudit"
+                   alias="OutCapitalFinanceAudit"/>
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalPurchaseSelfAssetsPayback"
+                   alias="OutCapitalPurchaseSelfAssetsPayback"/>
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalPurchaseSelfAssetsPaybackTransfer"
+                   alias="OutCapitalPurchaseSelfAssetsPaybackTransfer"/>
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalPurchaseSelfAssetsPaybackTransferAudit"
+                   alias="OutCapitalPurchaseSelfAssetsPaybackTransferAudit"/>
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalPurchaseSelfAssetsPaybackTransferDetail"
+                   alias="OutCapitalPurchaseSelfAssetsPaybackTransferDetail"/>
+                   
+        <typeAlias type="com.rongdu.fams.modules.outcapital.domain.OutCapitalFinanceProduct"
+                   alias="OutCapitalFinanceProduct"/>      
+
+		<!-- 产品运营  -->
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.Invest"
+                   alias="Invest"/> 
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.ProductOperateAudit"
+                   alias="ProductOperateAudit"/> 
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.ProductOperateDetail"
+                   alias="ProductOperateDetail"/> 
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.ProductOperateTransferDetail"
+                   alias="ProductOperateTransferDetail"/>
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.OperatePlatformDataRecords"
+                   alias="OperatePlatformDataRecords"/>
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.ProductOperatePayback"
+                   alias="ProductOperatePayback"/>       
+        <typeAlias type="com.rongdu.fams.modules.operate.domain.ValidateOperatePlatformDataRecords"
+                   alias="ValidateOperatePlatformDataRecords"/>
+          
+                 
+                            
+                   
+                       
+                       
+        <!-- 小金罐 -->
+        <typeAlias type="com.rongdu.fams.modules.goldpot.domain.OutCapitalTransfer" alias="OutCapitalTransfer"/>
+        <typeAlias type="com.rongdu.fams.modules.goldpot.domain.OutCapitalTransferAudit"
+                   alias="OutCapitalTransferAudit"/>
+        <typeAlias type="com.rongdu.fams.modules.goldpot.domain.OutCapitalTransferDetail"
+                   alias="OutCapitalTransferDetail"/>
+       
+        <!-- 兑付管理 -->
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashOutCapitalFinance" alias="CashOutCapitalFinance" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashOutCapitalFinanceAudit" alias="CashOutCapitalFinanceAudit" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashOutCapitalFinanceDetail" alias="CashOutCapitalFinanceDetail" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashProduct" alias="CashProduct" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashProductAudit" alias="CashProductAudit" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashProductDetail" alias="CashProductDetail" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashProductPayback" alias="CashProductPayback" />
+        <!-- 理财产品兑付管理 -->
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashFinProductAudit" alias="CashFinProductAudit" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashFinProductDetail" alias="CashFinProductDetail" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashFinProduct" alias="CashFinProduct" />
+        <typeAlias type="com.rongdu.fams.modules.cash.domain.CashFinProductPayback" alias="CashFinProductPayback" />
+ 	
+ 		<!-- 系统管理 -->
+ 		<typeAlias type="com.rongdu.fams.modules.system.domain.SysBankAccount" alias="SysBankAccount" />
+ 		<typeAlias type="com.rongdu.fams.modules.system.domain.SysCapitalPoolThresholding" alias="SysCapitalPoolThresholding" />
+       
+         <!-- 系统业务编码 -->
+        <typeAlias type="com.rongdu.fams.modules.code.domain.ServiceNumber" alias="ServiceNumber" />
+       
+
+       	<!-- 注意： 扫描包的package标签必须写在typeAlias标签后, 否则报错 -->
+       
+        <!-- 资产采购 -->
+        <package name="com.rongdu.fams.modules.purchase.domain" />
+
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.github.miemiedev.mybatis.paginator.OffsetLimitInterceptor">
+            <property name="dialectClass" value="com.github.miemiedev.mybatis.paginator.dialect.OracleDialect"/>
+        </plugin>
+        <!-- com.github.pagehelper为PageHelper类所在包名 -->
+        <plugin interceptor="com.github.pagehelper.PageHelper">
+            <property name="dialect" value="mysql"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用 -->
+            <!-- 和startPage中的pageNum效果一样-->
+            <property name="offsetAsPageNum" value="true"/>
+            <!-- 该参数默认为false -->
+            <!-- 设置为true时，使用RowBounds分页会进行count查询 -->
+            <property name="rowBoundsWithCount" value="true"/>
+            <!-- 设置为true时，如果pageSize=0或者RowBounds.limit = 0就会查询出全部的结果 -->
+            <!-- （相当于没有执行分页查询，但是返回结果仍然是Page类型）-->
+            <property name="pageSizeZero" value="true"/>
+            <!-- 3.3.0版本可用 - 分页参数合理化，默认false禁用 -->
+            <!-- 启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页 -->
+            <!-- 禁用合理化时，如果pageNum<1或pageNum>pages会返回空数据 -->
+            <property name="reasonable" value="true"/>
+            <!-- 3.5.0版本可用 - 为了支持startPage(Object params)方法 -->
+            <!-- 增加了一个`params`参数来配置参数映射，用于从Map或ServletRequest中取值 -->
+            <!-- 可以配置pageNum,pageSize,count,pageSizeZero,reasonable,不配置映射的用默认值 -->
+            <property name="params"
+                      value="pageNum=start;pageSize=limit;pageSizeZero=zero;reasonable=heli;count=contsql"/>
+        </plugin>
+    </plugins>
+</configuration>
