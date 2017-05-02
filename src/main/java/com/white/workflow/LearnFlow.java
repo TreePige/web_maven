@@ -41,14 +41,7 @@ public class LearnFlow {
 		TaskService taskService = processEngine.getTaskService();
 
 		TaskQuery query = taskService.createTaskQuery();
-
-		List<Task> tasks = query.list();
-
-		for (Task task : tasks) {
-			log(task.getId() + "," + task.getName());
-			taskService.complete(task.getId(), variables);
-		}
-
+		
 		logout(variables, taskService, query);
 	}
 
