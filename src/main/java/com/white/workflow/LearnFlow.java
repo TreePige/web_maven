@@ -33,7 +33,7 @@ public class LearnFlow {
 
 		Map<String, Object> variables = new HashMap<>();
 		variables.put("userid", "10010");
-		variables.put("day", 2);
+		variables.put("day", 4);
 		variables.put("comment", "pass");
 		
 		runtimeService.startProcessInstanceByKey("rongdu.forLeave", variables);
@@ -49,23 +49,22 @@ public class LearnFlow {
 			taskService.complete(task.getId(), variables);
 		}
 
+		logout(variables, taskService, query);
+	}
+
+	private static void logout(Map<String, Object> variables, TaskService taskService, TaskQuery query) {
+		List<Task> tasks;
 		log("--------------------");
 
 		tasks = query.list();
-
+		if (tasks.size() == 0) {
+			return;
+		}
 		for (Task task : tasks) {
 			log(task.getId() + "," + task.getName());
 			taskService.complete(task.getId(), variables);
 		}
-
-		log("--------------------");
-
-		tasks = query.list();
-
-		for (Task task : tasks) {
-			log(task.getId() + "," + task.getName());
-			taskService.complete(task.getId(), variables);
-		}
+		logout(variables, taskService, query);
 	}
 
 	public static void main(String[] args) {
