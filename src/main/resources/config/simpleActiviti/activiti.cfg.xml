@@ -3,11 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans  
        http://www.springframework.org/schema/beans/spring-beans.xsd">
-
 	<bean id="processEngineConfiguration"
 		class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
 		<property name="databaseSchemaUpdate" value="drop-create" />
-		<property name="jdbcUrl" value="jdbc:mysql\://localhost:3307/web_maven?rewriteBatchedStatements=true&useUnicode=true&characterEncoding=utf8&autoReconnect=true" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3307/web_maven"/>
 		<property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
 		<property name="jdbcUsername" value="root" />
 		<property name="jdbcPassword" value="123123" />

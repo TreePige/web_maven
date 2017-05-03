@@ -1,7 +1,7 @@
 package com.white.workflow;
 
+import java.io.InputStream;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -27,13 +27,14 @@ public class LearnFlow {
 		
 		RepositoryService repositoryService = processEngine.getRepositoryService();
 
-		repositoryService.createDeployment().addClasspathResource("qingjia.bpmn20.xml").deploy();
+		String url = "config/bpmn/qingjia.bpmn20.xml";
+		repositoryService.createDeployment().addClasspathResource(url).deploy();
 
 		RuntimeService runtimeService = processEngine.getRuntimeService();
 
 		Map<String, Object> variables = new HashMap<>();
 		variables.put("userid", "10010");
-		variables.put("day", 4);
+		variables.put("day", 10);
 		variables.put("comment", "pass");
 		
 		runtimeService.startProcessInstanceByKey("rongdu.forLeave", variables);
@@ -62,7 +63,8 @@ public class LearnFlow {
 
 	public static void main(String[] args) {
 		try {
-			String url = "activiti.cfg.xml";
+			//URL url1 = ClassLoader.getSystemClassLoader().getResource("/activiti.cfg.xml");
+			String url = "/config/simpleActiviti/activiti.cfg.xml";
 			
 			ProcessEngine processEngine = ProcessEngineConfiguration
 					.createProcessEngineConfigurationFromResource(url).buildProcessEngine();
@@ -81,6 +83,7 @@ public class LearnFlow {
 
 	}
 
+	@SuppressWarnings("unused")
 	private static void test() {
 		//声明Connection对象
         Connection con;
