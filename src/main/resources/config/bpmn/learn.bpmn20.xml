@@ -14,7 +14,7 @@
     	
     	<sequenceFlow id="flow1" targetRef="dept_manager" sourceRef="learn_1"></sequenceFlow>
     	<sequenceFlow id="flow2" targetRef="boss_manager" sourceRef="dept_manager">
-    		<conditionExpression xsi:type="tFormalExpression"><![CDATA[${day >= 5}]]></CDATA></conditionExpression>
+    		<conditionExpression xsi:type="tFormalExpression"><![CDATA[${day >= 5}]]></conditionExpression>
     	</sequenceFlow>
     	<sequenceFlow id="flow3" targetRef="hr_manager" sourceRef="boss_manager"></sequenceFlow>
     	<sequenceFlow id="flow4" targetRef="hr_manager" sourceRef="dept_manager">
